@@ -1,9 +1,14 @@
 <resources>
-    <string name="app_name">MyWeather</string>
-    <string name="menu_bottom_navigation_view_weather">weather</string>
-    <string name="map_fragment">map</string>
-    <string name="menu_bottom_navigation_view_settings">settings</string>
 
+    <string name="app_name">MyWeather</string>
+
+    <!--MainActivity-->
+    <string name="menu_bottom_navigation_view_weather">weather</string>
+    <string name="menu_bottom_navigation_view_settings">settings</string>
+    <string name="map_fragment">map</string>
+
+    <!--MapFragment-->
+    <string name="fragment_map_text_input_edit_text_search">Введите адрес</string>
     <string-array name="cityName">
         <item>Абаза</item>
         <item>Абакан</item>

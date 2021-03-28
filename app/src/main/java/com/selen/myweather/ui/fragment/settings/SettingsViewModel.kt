@@ -9,9 +9,9 @@ import androidx.lifecycle.ViewModel
 class SettingsViewModel : ViewModel() {
 
     var count: Int = 0
-    val data = MutableLiveData<Int>()
+    val dataLiveData = MutableLiveData<Int>()
 
     fun addCount() {
-        data.value = ++count
+        dataLiveData.value = ++count
     }
 }

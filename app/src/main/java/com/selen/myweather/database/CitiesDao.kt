@@ -2,6 +2,7 @@ package com.selen.myweather.database
 
 import androidx.room.*
 import com.selen.myweather.database.entity.CityEntity
+import io.reactivex.Flowable
 
 /**
  * @author Pyaterko Aleksey
@@ -28,6 +29,9 @@ interface CitiesDao {
 
     @Query("SELECT * FROM Cities")
     fun getAllCities(): List<CityEntity?>?
+
+    @Query("SELECT * FROM Cities")
+    fun getAllCitiesRX(): Flowable<List<CityEntity>>
 
     @Query("SELECT * FROM Cities WHERE `city_name` = :cityName")
     fun getCityByCityName(cityName: String?): CityEntity?

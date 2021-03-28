@@ -31,7 +31,7 @@ class SettingsFragment : Fragment() {
         settingsButton = view.findViewById(R.id.fragment_settings_button)
 
         viewModel.apply {
-            data.observeForever { myData(it) }
+            dataLiveData.observeForever { myData(it) }
         }
 
         settingsButton.text = viewModel.count.toString()

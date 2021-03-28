@@ -1,7 +1,7 @@
 package com.selen.myweather.database.mapper
 
 import com.selen.myweather.database.entity.CityEntity
-import com.selen.myweather.database.model.CityModel
+import com.selen.myweather.model.CityDatabaseModel
 
 /**
  * @author Pyaterko Aleksey
@@ -10,16 +10,16 @@ import com.selen.myweather.database.model.CityModel
  */
 class CityMapper {
 
-    fun entityToModel(entity: CityEntity?): CityModel? {
+    fun entityToModel(entity: CityEntity?): CityDatabaseModel? {
         if (entity == null) return null
 
-        val model = CityModel()
+        val model = CityDatabaseModel()
         model.id = entity.id
-        model.cityName = entity.cityName
+        model.cityName = entity.cityName ?: ""
         return model
     }
 
-    fun modelToEntity(model: CityModel?): CityEntity? {
+    fun modelToEntity(model: CityDatabaseModel?): CityEntity? {
         if (model == null) return null
 
         val entity = CityEntity()
@@ -28,23 +28,23 @@ class CityMapper {
         return entity
     }
 
-    fun entityListToModelList(entityList: List<CityEntity?>?): List<CityModel?>? {
-        if (entityList == null) return null
+    fun entityListToModelList(entityList: List<CityEntity?>?): List<CityDatabaseModel> {
+        if (entityList == null) return listOf()
 
-        val modelList: MutableList<CityModel?> = mutableListOf()
+        val modelList: MutableList<CityDatabaseModel> = mutableListOf()
         entityList.forEach { entity ->
             entity?.let {
-                val model = CityModel()
+                val model = CityDatabaseModel()
                 model.id = it.id
-                model.cityName = it.cityName
+                model.cityName = it.cityName ?: ""
                 modelList.add(model)
-            } ?: modelList.add(null)
+            } ?: modelList.add(CityDatabaseModel())
         }
         return modelList
     }
 
-    fun modelListToEntityList(modelList: List<CityModel?>?): List<CityEntity?>? {
-        if (modelList == null) return null
+    fun modelListToEntityList(modelList: List<CityDatabaseModel?>?): List<CityEntity?> {
+        if (modelList == null) return listOf()
 
         val entityList: MutableList<CityEntity?> = mutableListOf()
         modelList.forEach { model ->

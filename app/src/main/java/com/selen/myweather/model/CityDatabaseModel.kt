@@ -1,4 +1,4 @@
-package com.selen.myweather.database.model
+package com.selen.myweather.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 /**
  * @author Pyaterko Aleksey
  */
-class CityModel {
+class CityDatabaseModel {
     var id: Long = 0
-    var cityName: String? = null
+    var cityName: String = ""
 }
