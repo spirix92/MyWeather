@@ -11,6 +11,7 @@ interface WeatherApiWorker {
     fun loadWeather(
         cityCountry: String,
         units: String,
-        keyApi: String
+        keyApi: String,
+        lang: String
     ): Single<WeatherResponse>
 }

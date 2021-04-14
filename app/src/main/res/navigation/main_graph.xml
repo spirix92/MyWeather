@@ -10,8 +10,8 @@
         android:label="fragment_weather"
         tools:layout="@layout/fragment_weather">
         <action
-            android:id="@+id/action_weather_fragment_to_settings_fragment"
-            app:destination="@id/settings_fragment"
+            android:id="@+id/action_weather_fragment_to_map_fragment"
+            app:destination="@id/map_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"

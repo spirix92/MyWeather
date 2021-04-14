@@ -1,5 +1,6 @@
 package com.selen.myweather.database.entity
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,9 +11,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Cities")
 class CityEntity {
 
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0
-
+    @NonNull
+    @PrimaryKey
     @ColumnInfo(name = "city_name")
     var cityName: String? = null
 }

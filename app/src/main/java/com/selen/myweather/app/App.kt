@@ -49,7 +49,6 @@ class App : Application() {
         context = applicationContext
 
         initCitiesDatabase()
-        fillingTheTableCitiesRepository()
 
         initRetrofit()
     }
@@ -66,42 +65,6 @@ class App : Application() {
 
         citiesDao = citiesDatabase.getCitiesDao()
         citiesRepository = CitiesRepository(citiesDatabase)
-    }
-
-    //    заполнение списка городов в БД
-    //    т.к. приложение демонстрационное, список городов получаем из массива и заполняем в БД(как будто скачали из сети)
-    private fun fillingTheTableCitiesRepository() {
-//        очищаем БД
-        citiesRepository.removeAllCities()
-            .subscribeOn(Schedulers.io())
-            .subscribe(
-                { Log.d(LOG_TAG, "бд очистили") },
-                { error ->
-                    Log.d(
-                        LOG_TAG,
-                        error.message ?: "пытались очистить БД, но что-то пошло не так"
-                    )
-                })
-//        генерируем список городов
-        val mutableCitiesList: MutableList<CityDatabaseModel> = mutableListOf()
-        resources.getStringArray(R.array.cityName).toList().forEachIndexed { index, name ->
-            val model = CityDatabaseModel()
-            model.id = index.toLong()
-            model.cityName = name
-            mutableCitiesList.add(model)
-        }
-        Log.d(LOG_TAG, "в списке городов ${mutableCitiesList.size} штук")
-//        записываем в БД
-        citiesRepository.addListCities(mutableCitiesList)
-            .subscribeOn(Schedulers.io())
-            .subscribe(
-                { Log.d(LOG_TAG, "в бд записали") },
-                { error ->
-                    Log.d(
-                        LOG_TAG,
-                        error.message ?: "пытались очистить БД, но что-то пошло не так"
-                    )
-                })
     }
 
     //    инициализация retrofit

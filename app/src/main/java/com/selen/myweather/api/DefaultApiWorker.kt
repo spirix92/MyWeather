@@ -8,9 +8,9 @@ import io.reactivex.Single
  */
 class DefaultApiWorker(private val api: WeatherApi) : WeatherApiWorker {
 
-    override fun loadWeather(cityCountry: String, units: String, keyApi: String)
+    override fun loadWeather(cityCountry: String, units: String, keyApi: String, lang: String)
             : Single<WeatherResponse> {
-        return api.loadWeather(cityCountry, units, keyApi)
+        return api.loadWeather(cityCountry, units, keyApi, lang)
     }
 
 }

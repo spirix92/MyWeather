@@ -14,7 +14,8 @@ interface WeatherApi {
     fun loadWeather(
         @Query("q") cityCountry: String,
         @Query("units") units: String,
-        @Query("appid") keyApi: String
+        @Query("appid") keyApi: String,
+        @Query("lang") lang: String
     ): Single<WeatherResponse>
 
 }

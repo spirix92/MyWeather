@@ -2,14 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/weather_fragment"
-        android:icon="@drawable/baseline_cloud_circle_black_24dp"
+        android:icon="@drawable/ic_cloud_black"
         android:title="@string/menu_bottom_navigation_view_weather"/>
     <item
-        android:id="@+id/map_fragment"
-        android:icon="@drawable/baseline_maps_home_work_black_24dp"
-        android:title="@string/map_fragment" />
-    <item
         android:id="@+id/settings_fragment"
-        android:icon="@drawable/baseline_settings_black_24dp"
+        android:icon="@drawable/ic_settings_black"
         android:title="@string/menu_bottom_navigation_view_settings" />
 </menu>

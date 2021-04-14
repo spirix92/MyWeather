@@ -7,8 +7,13 @@
     <string name="menu_bottom_navigation_view_settings">settings</string>
     <string name="map_fragment">map</string>
 
+    <!--WeatherFragment-->
+    <string name="icon_weather_url">https://openweathermap.org/img/wn/%1s@4x.png</string>
+    <string name="current_temp_feel_like">Ощущается как: %1d°</string>
+
     <!--MapFragment-->
     <string name="fragment_map_text_input_edit_text_search">Введите адрес</string>
+    <string name="default_city">Москва</string>
     <string-array name="cityName">
         <item>Абаза</item>
         <item>Абакан</item>

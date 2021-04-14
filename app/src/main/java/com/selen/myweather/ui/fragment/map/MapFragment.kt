@@ -8,13 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.selen.myweather.R
+import com.selen.myweather.extension.hideKeyboard
 import com.selen.myweather.model.CityDatabaseModel
 import com.selen.myweather.ui.fragment.map.adapter.MapAddressAdapter
+import com.selen.myweather.ui.fragment.map.pref.CityPref
 
 /**
  * @author Pyaterko Aleksey
@@ -26,12 +29,20 @@ class MapFragment : Fragment() {
     private lateinit var addressRecycler: RecyclerView
     private lateinit var addressAdapter: MapAddressAdapter
 
+    private val currentCityData = CityPref()
+
+    private val onCityClick: ((String) -> (Unit)) = { city: String ->
+        currentCityData.currentCitySelected = city
+        Navigation.findNavController(addressRecycler).popBackStack()
+        hideKeyboard()
+    }
+
     //    TextWatcher для работы поисковой строки
     private var addressTextWatcher: TextWatcher = object : TextWatcher {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
         override fun afterTextChanged(s: Editable) {
-            viewModel.loadAddress(s.toString())
+            viewModel.loadAddress(filterAddress = s.toString())
         }
     }
 
@@ -56,6 +67,7 @@ class MapFragment : Fragment() {
         }
 
         addressAdapter = MapAddressAdapter()
+        addressAdapter.onCityClick = onCityClick
 
         addressRecycler.apply {
             layoutManager = LinearLayoutManager(context)
@@ -65,13 +77,13 @@ class MapFragment : Fragment() {
         searchInputEditText.addTextChangedListener(addressTextWatcher)
     }
 
-    fun initViews(view: View) {
+    private fun initViews(view: View) {
         searchInputLayout = view.findViewById(R.id.fragment_map_text_input_layout_search)
         searchInputEditText = view.findViewById(R.id.fragment_map_text_input_edit_text_search)
         addressRecycler = view.findViewById(R.id.fragment_map_recycler_view_cities)
     }
 
-    fun setAddress(cities: List<CityDatabaseModel>) {
+    private fun setAddress(cities: List<CityDatabaseModel>) {
         addressAdapter.setData(cities)
     }
 

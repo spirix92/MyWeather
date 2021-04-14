@@ -5,37 +5,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.weather.WeatherFragment">
+
     <Button
         android:id="@+id/fragment_weather_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="в настройки"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
+        android:id="@+id/fragment_weather_image_view_current_weather_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/a"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/weather_image"
+        app:layout_constraintBottom_toTopOf="@id/fragment_weather_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragment_weather_text_view_current_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_weather_image_view_current_weather_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fragment_weather_image_view_current_weather_image"
+        app:layout_constraintVertical_bias="0.1"
+        tools:text="Москва" />
+
+    <TextView
+        android:id="@+id/fragment_weather_text_view_current_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toStartOf="@id/item_weather_image_view_current_weather_icon"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_weather_image_view_current_weather_icon"
+        app:layout_constraintBottom_toBottomOf="@id/item_weather_image_view_current_weather_icon"
+        tools:text="10°" />
+
+    <ImageView
+        android:id="@+id/item_weather_image_view_current_weather_icon"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fragment_weather_text_view_current_temp"
+        app:layout_constraintTop_toBottomOf="@id/fragment_weather_text_view_current_city" />
+
+    <TextView
+        android:id="@+id/fragment_weather_text_view_current_weather_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_weather_image_view_current_weather_icon"
+        tools:text="облачно" />
+
+    <TextView
+        android:id="@+id/fragment_weather_text_view_current_temp_feel_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_weather_text_view_current_weather_description"
+        tools:text="Ощущается как: 5°" />
+
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/fragment_weather_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
-    <View
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_weather_recycler_view_weather"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/ic_bottom_fragment_view_vector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline"/>
+        app:layout_constraintTop_toBottomOf="@id/fragment_weather_guideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

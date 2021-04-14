@@ -2,11 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_map_constraint_layout_address"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/item_map_address_text_view_address"
+        android:id="@+id/item_map_text_view_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
