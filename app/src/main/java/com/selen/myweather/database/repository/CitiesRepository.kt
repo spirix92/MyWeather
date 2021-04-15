@@ -34,7 +34,7 @@ class CitiesRepository constructor(citiesDatabase: CitiesDatabase) {
                     Log.d(App.LOG_TAG, "бд очистили")
 //        генерируем список городов(получим из массива)
                     val mutableCitiesList: MutableList<CityDatabaseModel> = mutableListOf()
-                    it.resources.getStringArray(R.array.cityName).toList()
+                    it.resources.getStringArray(R.array.city_names).toList()
                         .forEachIndexed { index, name ->
                             val model = CityDatabaseModel()
                             model.cityName = name
