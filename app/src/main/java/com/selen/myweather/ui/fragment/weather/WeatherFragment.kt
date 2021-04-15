@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.selen.myweather.R
 import com.selen.myweather.api.response.WeatherResponse
@@ -32,6 +34,10 @@ class WeatherFragment : Fragment() {
     private lateinit var weatherRecycler: RecyclerView
     private lateinit var weatherAdapter: WeatherAdapter
 
+    private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var errorGroup: Group
+    private lateinit var dataGroup: Group
+
     private val viewModel: WeatherViewModel by lazy {
         ViewModelProvider(this).get(WeatherViewModel::class.java)
     }
@@ -50,6 +56,18 @@ class WeatherFragment : Fragment() {
 
         initViews(view)
 
+        swipeRefresh.apply {
+            setOnRefreshListener {
+                viewModel.onSwipeRefresh(currentCityData.currentCitySelected)
+            }
+            setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+            )
+        }
+
         weatherAdapter = WeatherAdapter()
 
         weatherRecycler.apply {
@@ -58,7 +76,9 @@ class WeatherFragment : Fragment() {
         }
 
         viewModel.apply {
+            loadingLiveData.observeForever { setLoading(it) }
             weatherLiveData.observeForever { setWeather(it) }
+            errorLiveData.observeForever { setError(it) }
         }
 
         currentCity.setOnClickListener {
@@ -71,6 +91,9 @@ class WeatherFragment : Fragment() {
     }
 
     private fun initViews(view: View) {
+        swipeRefresh = view.findViewById(R.id.fragment_weather_swipe_refresh)
+        dataGroup = view.findViewById(R.id.fragment_weather_group_data)
+        errorGroup = view.findViewById(R.id.fragment_weather_group_error)
         currentWeatherImage =
             view.findViewById(R.id.fragment_weather_image_view_current_weather_image)
         currentCity = view.findViewById(R.id.fragment_weather_text_view_current_city)
@@ -103,6 +126,20 @@ class WeatherFragment : Fragment() {
                     getString(R.string.icon_weather_url, currentWeather.weather.first().icon)
                 ).into(currentWeatherIcon)
 
+        }
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        swipeRefresh.isRefreshing = isLoading
+    }
+
+    private fun setError(isError: Boolean) {
+        if (isError) {
+            errorGroup.visibility = View.VISIBLE
+            dataGroup.visibility = View.GONE
+        } else {
+            errorGroup.visibility = View.GONE
+            dataGroup.visibility = View.VISIBLE
         }
     }
 

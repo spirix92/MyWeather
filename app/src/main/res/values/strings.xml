@@ -10,6 +10,7 @@
     <!--WeatherFragment-->
     <string name="icon_weather_url">https://openweathermap.org/img/wn/%1s@4x.png</string>
     <string name="current_temp_feel_like">Ощущается как: %1d°</string>
+    <string name="load_weather_error">Во время загрузки возникли проблемы \nПопробуйте обновить позднее</string>
 
     <!--MapFragment-->
     <string name="fragment_map_text_input_edit_text_search">Введите адрес</string>

@@ -35,7 +35,8 @@ class MapAddressAdapter : RecyclerView.Adapter<MapAddressAdapter.MapAddressViewH
     }
 
     inner class MapAddressViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private var addressContainer = view.findViewById<ConstraintLayout>(R.id.item_map_constraint_layout_address)
+        private var addressContainer =
+            view.findViewById<ConstraintLayout>(R.id.item_map_constraint_layout_address)
         private var address = view.findViewById<TextView>(R.id.item_map_text_view_address)
 
         fun bind(item: CityDatabaseModel) {

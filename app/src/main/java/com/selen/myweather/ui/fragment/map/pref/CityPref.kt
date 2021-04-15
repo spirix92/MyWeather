@@ -7,7 +7,7 @@ import com.selen.myweather.app.App
 /**
  * @author Pyaterko Aleksey
  */
-class CityPref () {
+class CityPref {
 
     val context = App.instance
 
