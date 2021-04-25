@@ -2,20 +2,19 @@ package com.selen.myweather.ui.fragment.weather
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.selen.myweather.api.WeatherApi
+import com.selen.myweather.api.WeatherApiWorker
 import com.selen.myweather.api.response.WeatherResponse
-import com.selen.myweather.app.App
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.text.SimpleDateFormat
-import java.util.*
+import javax.inject.Inject
 
 /**
  * @author Pyaterko Aleksey
  */
 class WeatherViewModel : ViewModel() {
 
-    private val api: WeatherApi by lazy { App.instance.getApi() }
+    @Inject
+    lateinit var api: WeatherApiWorker
 
     val loadingLiveData = MutableLiveData<Boolean>()
     val weatherLiveData = MutableLiveData<WeatherResponse>()

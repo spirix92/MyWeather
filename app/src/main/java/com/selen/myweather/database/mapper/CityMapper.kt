@@ -21,9 +21,7 @@ class CityMapper {
     fun modelToEntity(model: CityDatabaseModel?): CityEntity? {
         if (model == null) return null
 
-        val entity = CityEntity()
-        entity.cityName = model.cityName
-        return entity
+        return CityEntity(model.cityName)
     }
 
     fun entityListToModelList(entityList: List<CityEntity?>?): List<CityDatabaseModel> {
@@ -46,8 +44,7 @@ class CityMapper {
         val entityList: MutableList<CityEntity?> = mutableListOf()
         modelList.forEach { model ->
             model?.let {
-                val entity = CityEntity()
-                entity.cityName = it.cityName
+                val entity = CityEntity(it.cityName)
                 entityList.add(entity)
             } ?: entityList.add(null)
         }

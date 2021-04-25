@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.selen.myweather.R
+import com.selen.myweather.app.App
 
 /**
  * Основновной экран single activity
@@ -20,12 +21,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     private val viewModel: MainActivityViewModel by lazy {
-        ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        ViewModelProvider(this).get(MainActivityViewModel::class.java).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        App.instance.appComponent.inject(this)
 
         navController = Navigation.findNavController(this, R.id.main_activity_fragment_container)
 

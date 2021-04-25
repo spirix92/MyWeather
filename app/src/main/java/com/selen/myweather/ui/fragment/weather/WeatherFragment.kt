@@ -16,8 +16,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.selen.myweather.R
 import com.selen.myweather.api.response.WeatherResponse
+import com.selen.myweather.app.App
 import com.selen.myweather.ui.fragment.map.pref.CityPref
 import com.selen.myweather.ui.fragment.weather.adapter.WeatherAdapter
+import javax.inject.Inject
 
 /**
  * Начальный экран для отображения погоды
@@ -39,10 +41,13 @@ class WeatherFragment : Fragment() {
     private lateinit var dataGroup: Group
 
     private val viewModel: WeatherViewModel by lazy {
-        ViewModelProvider(this).get(WeatherViewModel::class.java)
+        ViewModelProvider(this).get(WeatherViewModel::class.java).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
-    private val currentCityData = CityPref()
+    @Inject
+    lateinit var currentCityData: CityPref
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +58,7 @@ class WeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        App.instance.appComponent.inject(this)
 
         initViews(view)
 
@@ -87,7 +93,6 @@ class WeatherFragment : Fragment() {
         }
 
         viewModel.loadWeather(currentCityData.currentCitySelected)
-
     }
 
     private fun initViews(view: View) {

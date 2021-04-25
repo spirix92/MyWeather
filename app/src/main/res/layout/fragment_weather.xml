@@ -16,11 +16,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitXY"
-            android:src="@drawable/weather_image"
             app:layout_constraintBottom_toTopOf="@id/fragment_weather_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/weather_image" />
 
         <TextView
             android:id="@+id/fragment_weather_text_view_current_city"

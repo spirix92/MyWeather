@@ -5,7 +5,6 @@ import android.util.Log
 import com.selen.myweather.R
 import com.selen.myweather.app.App
 import com.selen.myweather.database.CitiesDao
-import com.selen.myweather.database.CitiesDatabase
 import com.selen.myweather.database.mapper.CityMapper
 import com.selen.myweather.model.CityDatabaseModel
 import io.reactivex.Completable
@@ -17,34 +16,33 @@ import io.reactivex.Flowable
  *
  * репозиторий для работы с БД CitiesDatabase
  */
-class CitiesRepository constructor(citiesDatabase: CitiesDatabase) {
-
-    private var citiesDao: CitiesDao = citiesDatabase.getCitiesDao()
+class CitiesRepository constructor(
+    val context: Context,
+    var citiesDao: CitiesDao
+) {
 
     private val cityMapper = CityMapper()
 
-    fun loadCitiesRX(context: Context?): Flowable<List<CityDatabaseModel>> {
+    fun loadCitiesRX(): Flowable<List<CityDatabaseModel>> {
         return citiesDao.getAllCitiesRX()
             .doOnSubscribe {
 //    заполнение списка городов в БД
 //    т.к. приложение демонстрационное, список городов получаем из массива и заполняем в БД(как будто скачали из сети)
 //        очистим список городов
-                context?.let {
-                    citiesDao.deleteAllCities()
-                    Log.d(App.LOG_TAG, "бд очистили")
+                citiesDao.deleteAllCities()
+                Log.d(App.LOG_TAG, "бд очистили")
 //        генерируем список городов(получим из массива)
-                    val mutableCitiesList: MutableList<CityDatabaseModel> = mutableListOf()
-                    it.resources.getStringArray(R.array.city_names).toList()
-                        .forEachIndexed { index, name ->
-                            val model = CityDatabaseModel()
-                            model.cityName = name
-                            mutableCitiesList.add(model)
-                        }
-                    Log.d(App.LOG_TAG, "в списке ${mutableCitiesList.size} городов")
+                val mutableCitiesList: MutableList<CityDatabaseModel> = mutableListOf()
+                context.resources.getStringArray(R.array.city_names).toList()
+                    .forEachIndexed { index, name ->
+                        val model = CityDatabaseModel()
+                        model.cityName = name
+                        mutableCitiesList.add(model)
+                    }
+                Log.d(App.LOG_TAG, "в списке ${mutableCitiesList.size} городов")
 //        записываем в БД
-                    citiesDao.insertListCities(cityMapper.modelListToEntityList(mutableCitiesList))
-                    Log.d(App.LOG_TAG, "в бд записали")
-                }
+                citiesDao.insertListCities(cityMapper.modelListToEntityList(mutableCitiesList))
+                Log.d(App.LOG_TAG, "в бд записали")
             }
             .map { cities ->
                 cityMapper.entityListToModelList(cities)

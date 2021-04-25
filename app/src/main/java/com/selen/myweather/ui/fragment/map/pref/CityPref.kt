@@ -2,14 +2,11 @@ package com.selen.myweather.ui.fragment.map.pref
 
 import android.content.Context
 import com.selen.myweather.R
-import com.selen.myweather.app.App
 
 /**
  * @author Pyaterko Aleksey
  */
-class CityPref {
-
-    val context = App.instance
+class CityPref(context: Context) {
 
     private val prefs = context.getSharedPreferences(SHARED_PREFS_FILE_NAME, Context.MODE_PRIVATE)
     private val defaultCity: String = context.getString(R.string.default_city)

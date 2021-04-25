@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.selen.myweather.R
+import com.selen.myweather.app.App
 import com.selen.myweather.extension.hideKeyboard
 import com.selen.myweather.model.CityDatabaseModel
 import com.selen.myweather.ui.fragment.map.adapter.MapAddressAdapter
 import com.selen.myweather.ui.fragment.map.pref.CityPref
+import javax.inject.Inject
 
 /**
  * @author Pyaterko Aleksey
@@ -29,7 +31,14 @@ class MapFragment : Fragment() {
     private lateinit var addressRecycler: RecyclerView
     private lateinit var addressAdapter: MapAddressAdapter
 
-    private val currentCityData = CityPref()
+    private val viewModel: MapViewModel by lazy {
+        ViewModelProvider(this).get(MapViewModel::class.java).apply {
+            App.instance.appComponent.inject(this)
+        }
+    }
+
+    @Inject
+    lateinit var currentCityData: CityPref
 
     private val onCityClick: ((String) -> (Unit)) = { city: String ->
         currentCityData.currentCitySelected = city
@@ -46,10 +55,6 @@ class MapFragment : Fragment() {
         }
     }
 
-    private val viewModel: MapViewModel by lazy {
-        ViewModelProvider(this).get(MapViewModel::class.java)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +64,7 @@ class MapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        App.instance.appComponent.inject(this)
 
         initViews(view)
 
@@ -75,6 +81,8 @@ class MapFragment : Fragment() {
         }
 
         searchInputEditText.addTextChangedListener(addressTextWatcher)
+
+        viewModel.loadAddress()
     }
 
     private fun initViews(view: View) {

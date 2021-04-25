@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.selen.myweather.R
+import com.selen.myweather.app.App
 
 /**
  * Экран для отображения погоды
@@ -17,7 +18,9 @@ class SettingsFragment : Fragment() {
     private lateinit var settingsButton: Button
 
     private val viewModel: SettingsViewModel by lazy {
-        ViewModelProvider(this).get(SettingsViewModel::class.java)
+        ViewModelProvider(this).get(SettingsViewModel::class.java).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     override fun onCreateView(
@@ -28,6 +31,9 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        App.instance.appComponent.inject(this)
+
         settingsButton = view.findViewById(R.id.fragment_settings_button)
 
         viewModel.apply {
@@ -36,8 +42,6 @@ class SettingsFragment : Fragment() {
 
         settingsButton.text = viewModel.count.toString()
         settingsButton.setOnClickListener { viewModel.addCount() }
-
-        super.onViewCreated(view, savedInstanceState)
     }
 
     fun myData(data: Int) {
