@@ -25,7 +25,7 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = WeatherViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_weather_weather, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.item_weather_fragment_weather, parent, false)
     )
 
     override fun getItemCount(): Int = items.size
@@ -35,13 +35,13 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() 
     }
 
     inner class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private var date = view.findViewById<TextView>(R.id.item_weather_text_view_date)
-        private var time = view.findViewById<TextView>(R.id.item_weather_text_view_time)
-        private var temp = view.findViewById<TextView>(R.id.item_weather_text_view_temp)
+        private var date = view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_date)
+        private var time = view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_time)
+        private var temp = view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_temp)
         private var tempFeelLike =
-            view.findViewById<TextView>(R.id.item_weather_text_view_temp_feel_like)
+            view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_temp_feel_like)
         private var imageWeather =
-            view.findViewById<ImageView>(R.id.item_weather_image_view_weather)
+            view.findViewById<ImageView>(R.id.item_weather_fragment_weather_image_view_weather)
 
         fun bind(item: WeatherList) {
             time.text = dateMapper.getDate(item.dtTxt)

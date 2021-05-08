@@ -13,12 +13,17 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.selen.myweather.R
 import com.selen.myweather.api.response.WeatherResponse
 import com.selen.myweather.app.App
 import com.selen.myweather.ui.fragment.map.pref.CityPref
+import com.selen.myweather.ui.fragment.weather.adapter.NewsAdapter
 import com.selen.myweather.ui.fragment.weather.adapter.WeatherAdapter
+import com.zhpan.indicator.IndicatorView
+import com.zhpan.indicator.enums.IndicatorSlideMode
+import com.zhpan.indicator.enums.IndicatorStyle
 import javax.inject.Inject
 
 /**
@@ -32,6 +37,10 @@ class WeatherFragment : Fragment() {
     private lateinit var currentWeatherIcon: ImageView
     private lateinit var currentWeatherDescription: TextView
     private lateinit var currentTempFeelLike: TextView
+
+    private lateinit var newsPager: ViewPager
+    private lateinit var newsAdapter: NewsAdapter
+    private lateinit var newsIndicatorView: IndicatorView
 
     private lateinit var weatherRecycler: RecyclerView
     private lateinit var weatherAdapter: WeatherAdapter
@@ -61,6 +70,8 @@ class WeatherFragment : Fragment() {
         App.instance.appComponent.inject(this)
 
         initViews(view)
+
+        initNewsViewPager()
 
         swipeRefresh.apply {
             setOnRefreshListener {
@@ -109,6 +120,42 @@ class WeatherFragment : Fragment() {
         currentTempFeelLike =
             view.findViewById(R.id.fragment_weather_text_view_current_temp_feel_like)
         weatherRecycler = view.findViewById(R.id.fragment_weather_recycler_view_weather)
+        newsIndicatorView = view.findViewById(R.id.fragment_weather_indicator_view_news)
+        newsPager = view.findViewById(R.id.fragment_weather_view_pager_news)
+    }
+
+    private fun initNewsViewPager() {
+        newsAdapter = NewsAdapter(requireContext())
+        newsPager.adapter = newsAdapter
+        newsPager.setPadding(80, 0, 80, 0)
+
+        newsAdapter.news = resources.getStringArray(R.array.news_names).toList()
+        newsAdapter.notifyDataSetChanged()
+        newsIndicatorView.setPageSize(newsAdapter.count)
+
+        newsIndicatorView.apply {
+            setSliderColor(R.color.teal_700, R.color.purple_700)
+            setSliderWidth(30f)
+            setSliderHeight(10f)
+            setSlideMode(IndicatorSlideMode.WORM)
+            setIndicatorStyle(IndicatorStyle.ROUND_RECT)
+            setPageSize(newsAdapter.count)
+            notifyDataChanged()
+        }
+
+        newsPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                newsIndicatorView.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            }
+
+            override fun onPageSelected(position: Int) {
+                newsIndicatorView.onPageSelected(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+        })
     }
 
     private fun setWeather(weather: WeatherResponse) {

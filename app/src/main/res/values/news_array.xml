@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="news_names">
+        <item>Новость 1, которых нет в api</item>
+        <item>Новость 2, которых нет в api</item>
+        <item>Новость 3, которых нет в api</item>
+        <item>Новость 4, которых нет в api</item>
+        <item>Новость 5, которых нет в api</item>
+        <item>Новость 6, которых нет в api</item>
+    </string-array>
+</resources>

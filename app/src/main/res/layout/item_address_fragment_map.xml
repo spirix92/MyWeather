@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/item_map_text_view_address"
+        android:id="@+id/item_address_fragment_map_text_view_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -16,5 +16,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="адрес" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

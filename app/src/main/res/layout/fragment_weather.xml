@@ -95,7 +95,33 @@
             android:id="@+id/fragment_weather_recycler_view_weather"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_weather_guideline" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/fragment_weather_view_pager_news"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_weather_image_view_current_weather_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/fragment_weather_image_view_current_weather_image"
+            app:layout_constraintVertical_bias="1" />
+
+        <com.zhpan.indicator.IndicatorView
+            android:id="@+id/fragment_weather_indicator_view_news"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_weather_guideline" />
@@ -126,14 +152,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="fragment_weather_text_view_current_city, fragment_weather_text_view_current_temp, item_weather_image_view_current_weather_icon, fragment_weather_text_view_current_weather_description, fragment_weather_text_view_current_temp_feel_like, fragment_weather_recycler_view_weather" />
+            app:constraint_referenced_ids="fragment_weather_text_view_current_city, fragment_weather_text_view_current_temp, item_weather_image_view_current_weather_icon, fragment_weather_text_view_current_weather_description, fragment_weather_text_view_current_temp_feel_like, fragment_weather_recycler_view_weather, fragment_weather_view_pager_news, fragment_weather_indicator_view_news" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/fragment_weather_group_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:constraint_referenced_ids="fragment_weather_card_view_error" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
