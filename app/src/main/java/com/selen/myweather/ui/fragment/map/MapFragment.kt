@@ -18,7 +18,7 @@ import com.selen.myweather.app.App
 import com.selen.myweather.extension.hideKeyboard
 import com.selen.myweather.model.CityDatabaseModel
 import com.selen.myweather.ui.fragment.map.adapter.MapAddressAdapter
-import com.selen.myweather.ui.fragment.map.pref.CityPref
+import com.selen.myweather.pref.CityPref
 import javax.inject.Inject
 
 /**

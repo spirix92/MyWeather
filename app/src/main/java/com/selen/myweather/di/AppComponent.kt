@@ -20,7 +20,8 @@ import javax.inject.Singleton
         AppModule::class,
         ApiModule::class,
         RoomModule::class,
-        CityPrefModule::class
+        CityPrefModule::class,
+        TemperatureUnitsPrefModule::class
     ]
 )
 interface AppComponent {

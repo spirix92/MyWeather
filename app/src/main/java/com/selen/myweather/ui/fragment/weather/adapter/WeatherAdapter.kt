@@ -18,14 +18,17 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() 
 
     private var items = mutableListOf<WeatherList>()
     private var dateMapper = DateParser()
+    private var tempUnit: String = ""
 
-    fun setData(list: List<WeatherList>) {
+    fun setData(list: List<WeatherList>, tempUnit: String) {
         items = list.toMutableList()
+        this.tempUnit = tempUnit
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = WeatherViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_weather_fragment_weather, parent, false)
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_weather_fragment_weather, parent, false)
     )
 
     override fun getItemCount(): Int = items.size
@@ -35,9 +38,12 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() 
     }
 
     inner class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private var date = view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_date)
-        private var time = view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_time)
-        private var temp = view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_temp)
+        private var date =
+            view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_date)
+        private var time =
+            view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_time)
+        private var temp =
+            view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_temp)
         private var tempFeelLike =
             view.findViewById<TextView>(R.id.item_weather_fragment_weather_text_view_temp_feel_like)
         private var imageWeather =
@@ -46,8 +52,8 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() 
         fun bind(item: WeatherList) {
             time.text = dateMapper.getDate(item.dtTxt)
             date.text = dateMapper.getTime(item.dtTxt)
-            temp.text = "${item.main.temp.toInt()}°"
-            tempFeelLike.text = "${item.main.feelsLike.toInt()}°"
+            temp.text = "${item.main.temp.toInt()}$tempUnit"
+            tempFeelLike.text = "${item.main.feelsLike.toInt()}$tempUnit"
 
             Glide
                 .with(imageWeather)

@@ -2,6 +2,11 @@
 
     <string name="app_name">MyWeather</string>
 
+    <!--View-->
+    <string name="celsius">°C</string>
+    <string name="fahrenheit">°F</string>
+    <string name="kelvin">°K</string>
+
     <!--MainActivity-->
     <string name="menu_bottom_navigation_view_weather">weather</string>
     <string name="menu_bottom_navigation_view_settings">settings</string>
@@ -9,10 +14,13 @@
 
     <!--WeatherFragment-->
     <string name="icon_weather_url">https://openweathermap.org/img/wn/%1s@4x.png</string>
-    <string name="current_temp_feel_like">Ощущается как: %1d°</string>
+    <string name="current_temp_feel_like">Ощущается как: %1d%2s</string>
     <string name="load_weather_error">Во время загрузки возникли проблемы \nПопробуйте обновить позднее</string>
 
     <!--MapFragment-->
     <string name="fragment_map_text_input_edit_text_search">Введите адрес</string>
     <string name="default_city">Москва</string>
+
+    <!--SettingsFragment-->
+    <string name="fragment_settings_text_view_temperature_units_title">Единицы измерения температуры</string>
 </resources>

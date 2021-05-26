@@ -1,4 +1,4 @@
-package com.selen.myweather.ui.fragment.map.pref
+package com.selen.myweather.pref
 
 import android.content.Context
 import com.selen.myweather.R

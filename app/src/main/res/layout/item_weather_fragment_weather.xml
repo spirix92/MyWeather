@@ -50,33 +50,33 @@
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/item_weather_fragment_weather_text_view_temp_feel_like"
+        <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:textColor="@color/gray"
-            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/item_weather_fragment_weather_text_view_time"
-            app:layout_constraintEnd_toStartOf="@id/item_weather_fragment_weather_image_view_weather"
-            tools:text="5°" />
+            app:layout_constraintEnd_toStartOf="@id/item_weather_fragment_weather_image_view_weather">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/item_weather_fragment_weather_guideline_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.8" />
+            <TextView
+                android:id="@+id/item_weather_fragment_weather_text_view_temp_feel_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:minWidth="40dp"
+                android:gravity="end"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                tools:text="5°" />
 
-        <TextView
-            android:id="@+id/item_weather_fragment_weather_text_view_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@id/item_weather_fragment_weather_text_view_time"
-            app:layout_constraintEnd_toStartOf="@id/item_weather_fragment_weather_guideline_temp"
-            tools:text="10°" />
+            <TextView
+                android:id="@+id/item_weather_fragment_weather_text_view_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_marginEnd="5dp"
+                android:minWidth="40dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="10°" />
+        </TableRow>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

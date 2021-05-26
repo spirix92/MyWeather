@@ -1,5 +1,6 @@
 package com.selen.myweather.ui.fragment.weather
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,8 @@ import com.bumptech.glide.Glide
 import com.selen.myweather.R
 import com.selen.myweather.api.response.WeatherResponse
 import com.selen.myweather.app.App
-import com.selen.myweather.ui.fragment.map.pref.CityPref
+import com.selen.myweather.pref.CityPref
+import com.selen.myweather.pref.TemperatureUnitsPref
 import com.selen.myweather.ui.fragment.weather.adapter.NewsAdapter
 import com.selen.myweather.ui.fragment.weather.adapter.WeatherAdapter
 import com.zhpan.indicator.IndicatorView
@@ -56,7 +58,14 @@ class WeatherFragment : Fragment() {
     }
 
     @Inject
+    lateinit var appContext: Context
+
+    @Inject
     lateinit var currentCityData: CityPref
+
+    @Inject
+    lateinit var currentTemperatureUnitsData: TemperatureUnitsPref
+    private var currentTemperatureUnits: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +77,8 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         App.instance.appComponent.inject(this)
+
+        currentTemperatureUnits = getString(currentTemperatureUnitsData.currentUnitSelected.characterResource)
 
         initViews(view)
 
@@ -144,7 +155,11 @@ class WeatherFragment : Fragment() {
         }
 
         newsPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
                 newsIndicatorView.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
 
@@ -160,22 +175,30 @@ class WeatherFragment : Fragment() {
 
     private fun setWeather(weather: WeatherResponse) {
         setCurrentDay(weather)
-        weatherAdapter.setData(weather.list)
+        weatherAdapter.setData(
+            weather.list,
+            currentTemperatureUnits
+        )
     }
 
     private fun setCurrentDay(weather: WeatherResponse) {
         if (!weather.list.isNullOrEmpty()) {
             val currentWeather = weather.list.first()
             currentCity.text = weather.city.name
-            currentTemp.text = "${currentWeather.main.temp.toInt()}°"
+            currentTemp.text =
+                "${currentWeather.main.temp.toInt()}${currentTemperatureUnits}"
             currentWeatherDescription.text = currentWeather.weather.first().description
             currentTempFeelLike.text =
-                getString(R.string.current_temp_feel_like, currentWeather.main.feelsLike.toInt())
+                appContext.getString(
+                    R.string.current_temp_feel_like,
+                    currentWeather.main.feelsLike.toInt(),
+                    currentTemperatureUnits
+                )
 
             Glide
-                .with(requireContext())
+                .with(appContext)
                 .load(
-                    getString(R.string.icon_weather_url, currentWeather.weather.first().icon)
+                    appContext.getString(R.string.icon_weather_url, currentWeather.weather.first().icon)
                 ).into(currentWeatherIcon)
 
         }

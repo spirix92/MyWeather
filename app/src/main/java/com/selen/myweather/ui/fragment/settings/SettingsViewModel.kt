@@ -1,17 +1,24 @@
 package com.selen.myweather.ui.fragment.settings
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.selen.myweather.pref.TemperatureUnitsPref
+import com.selen.myweather.type.TemperatureUnitsType
+import javax.inject.Inject
 
 /**
  * @author Pyaterko Aleksey
  */
 class SettingsViewModel : ViewModel() {
 
-    var count: Int = 0
-    val dataLiveData = MutableLiveData<Int>()
+    @Inject
+    lateinit var currentTemperatureUnitsData: TemperatureUnitsPref
 
-    fun addCount() {
-        dataLiveData.value = ++count
+    fun getCurrentTemperatureUnit(): TemperatureUnitsType {
+        return currentTemperatureUnitsData.currentUnitSelected
     }
+
+    fun setTemperatureUnit(unit: TemperatureUnitsType) {
+        currentTemperatureUnitsData.currentUnitSelected = unit
+    }
+
 }

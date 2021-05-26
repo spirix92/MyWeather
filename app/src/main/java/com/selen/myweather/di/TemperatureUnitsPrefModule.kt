@@ -1,7 +1,7 @@
 package com.selen.myweather.di
 
 import android.content.Context
-import com.selen.myweather.pref.CityPref
+import com.selen.myweather.pref.TemperatureUnitsPref
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -10,9 +10,9 @@ import javax.inject.Singleton
  * @author Pyaterko Aleksey
  */
 @Module
-class CityPrefModule {
+class TemperatureUnitsPrefModule {
 
     @Singleton
     @Provides
-    fun initCityPref(context: Context) = CityPref(context)
+    fun initUnitsPref(context: Context) = TemperatureUnitsPref(context)
 }
