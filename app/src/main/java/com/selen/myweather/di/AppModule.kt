@@ -8,12 +8,7 @@ import dagger.Provides
 /**
  * @author Pyaterko Aleksey
  */
-@Module(
-    includes = [
-        CityPrefModule::class,
-        RoomModule::class
-    ]
-)
+@Module
 class AppModule(val app: App) {
 
     @Provides

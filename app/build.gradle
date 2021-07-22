@@ -58,6 +58,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'com.github.zhpanvip:viewpagerindicator:1.2.0'
+
     /*
     * Lifecycle
     */

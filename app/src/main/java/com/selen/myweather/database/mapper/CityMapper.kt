@@ -14,7 +14,7 @@ class CityMapper {
         if (entity == null) return null
 
         val model = CityDatabaseModel()
-        model.cityName = entity.cityName ?: ""
+        model.cityName = entity.cityName
         return model
     }
 
@@ -31,7 +31,7 @@ class CityMapper {
         entityList.forEach { entity ->
             entity?.let {
                 val model = CityDatabaseModel()
-                model.cityName = it.cityName ?: ""
+                model.cityName = it.cityName
                 modelList.add(model)
             } ?: modelList.add(CityDatabaseModel())
         }
