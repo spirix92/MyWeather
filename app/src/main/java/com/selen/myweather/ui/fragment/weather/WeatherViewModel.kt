@@ -29,8 +29,6 @@ class WeatherViewModel : ViewModel() {
     }
 
     fun loadWeather(city: String) {
-        // TODO: 30.03.2021 добавить mapper
-        // TODO: 30.03.2021 вынести загрузку в loader
         // ключ в гите - кошмар
         // бесплатный ключ с тестового аккаунта в демонстрационном приложении - комфорт для просматривающего код :)
         api.loadWeather(city, currentTemperatureUnitsData.currentUnitSelected.unit, "d1467727eb1b785602d006f500e8c523", "ru")
